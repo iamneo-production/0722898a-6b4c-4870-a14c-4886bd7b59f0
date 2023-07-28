@@ -13,7 +13,7 @@ select PURCHASE_DATE, YEAR_FIELD from ECOMMERCE;
 
 create index index_on_date on ECOMMERCE(PURCHASE_DATE);
 -- select * from ECOMMERCE where COUNTRY= 'USA';
--- drop index index_on_date;
+drop index index_on_date;
 
 -- QUESTION 2
 explain plan set  statement_id='7' for select sum(PRICE * QUANTITY) as sale_amount,
