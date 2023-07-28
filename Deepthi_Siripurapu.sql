@@ -1,7 +1,6 @@
 set timing on;
 /*The above command is used to measure run time*/
 
-
 select *from ecommerce; /*For datainfo*/
 
 
