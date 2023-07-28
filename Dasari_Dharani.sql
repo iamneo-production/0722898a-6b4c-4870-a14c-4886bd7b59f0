@@ -1,5 +1,5 @@
 select * from ecommerce;
-desc ecommerce;
+-- desc ecommerce;
 set timing on;
 
 --Question-1
