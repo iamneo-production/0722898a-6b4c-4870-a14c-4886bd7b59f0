@@ -1,5 +1,5 @@
 set timing on;
--1.
+-- 1.
 
 select  SUM(Quantity) as soldproducts  
 from ecommerce where "PURCHASE_DATE" >='2019-02-01' 
