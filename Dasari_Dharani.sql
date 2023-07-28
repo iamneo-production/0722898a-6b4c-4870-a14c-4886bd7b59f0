@@ -1,6 +1,7 @@
 select * from ecommerce;
 desc ecommerce;
 set timing on;
+
 --Question-1
 
 select sum(QUANTITY) as quantity FROM ECOMMERCE where extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'))=2019 
