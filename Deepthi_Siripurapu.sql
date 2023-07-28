@@ -61,6 +61,7 @@ select *from table(DBMS_XPLAN.DISPLAY(null,'14','BASIC'));   /* Time Elapsed:  0
 
 --- FINAL OPTIMIZED CODE---
 
+
 -- QUERY1--
 explain plan set  statement_id='15' for select sum(quantity) as products_sold from ecommerce
 where (extract (year from to_date(Purchase_Date,'YYYY-MM-DD')))=2019 
