@@ -14,7 +14,7 @@ from ECOMMERCE group by extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'));
 
 --Question-3
 
-select PRODUCTNO,extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD')) as "Month_Feild",sum(PRICE * QUANTITY) 
+select PRODUCTNO,extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD')) as "Month_Field",sum(PRICE * QUANTITY) 
 as sale_amount from ecommerce 
 where extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'))='2019' group by productno, extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'));
 
