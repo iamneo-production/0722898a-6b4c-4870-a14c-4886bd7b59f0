@@ -1,6 +1,32 @@
 select * from ecommerce;
 desc ecommerce;
 set timing on;
+--Question-1
+
+select sum(QUANTITY) as quantity FROM ECOMMERCE where extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'))=2019 
+and extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'))=02; 
+
+--Question-2
+
+select sum(PRICE * QUANTITY) as total_sale_amount,
+extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD')) AS "Year_Field"
+from ECOMMERCE group by extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'));
+
+--Question-3
+
+select PRODUCTNO,extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD')) as "Month_Feild",sum(PRICE * QUANTITY) 
+as sale_amount from ecommerce 
+where extract(year from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'))='2019' group by productno, extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'));
+
+--Question-4
+
+select COUNTRY,count( DISTINCT CUSTOMERNO) as count from ECOMMERCE group by COUNTRY; 
+
+--Question-5
+
+select  Distinct PRODUCTNAME, extract(year from TO_DATE(Purchase_Date,'YYYY-MM-DD')) as year from ECOMMERCE ;
+
+--Final Optimized Code--
 
 -- Question 1
 
