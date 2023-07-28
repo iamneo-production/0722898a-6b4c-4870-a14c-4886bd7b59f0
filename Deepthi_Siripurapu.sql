@@ -34,6 +34,7 @@ explain plan set statement_id='12' for select productno, PURCHASE_DATE as "MONTH
 where PURCHASE_DATE LIKE '2019%' group by productno,PURCHASE_DATE;  --Explained--
 select *from table(DBMS_XPLAN.DISPLAY(null,'12','BASIC'));   /* Time Elapsed:  00:00:00:04*/
 
+
 --QUERY4--
 /*SQL Query to Count the customers from each country*/
 select count(unique(customerno)) as count,country from ECOMMERCE group by country;  /* Time Elapsed:  00:00:00:13*/
@@ -41,6 +42,7 @@ select count(unique(customerno)) as count,country from ECOMMERCE group by countr
 --explain plan--
 explain plan set statement_id='13' for select count(Unique(customerno)) as count,country from ECOMMERCE group by country;   --Explained--
 select *from table(DBMS_XPLAN.DISPLAY(null,'13','BASIC'));   /* Time Elapsed:  00:00:00:04*/
+
 
 --QUERY5--
 /*SQL Query to list unique product names sold from each year*/
@@ -60,31 +62,49 @@ select *from table(DBMS_XPLAN.DISPLAY(null,'14','BASIC'));   /* Time Elapsed:  0
 
 
 --- FINAL OPTIMIZED CODE---
+---WITHOUT EXPLAIN COMMAND---
 
--- QUERY1--
-explain plan set  statement_id='15' for select sum(quantity) as products_sold from ecommerce
-where (extract (year from to_date(Purchase_Date,'YYYY-MM-DD')))=2019 
-and (extract (month from to_date(Purchase_Date,'YYYY-MM-DD')))=2 ;  /* Time Elapsed:  00:00:00:03*/
-select * from table(DBMS_XPLAN.DISPLAY(null,'15','BASIC')); 
+--QUERY1--
+select sum(quantity) as products_sold from ecommerce where (extract (year from to_date(Purchase_Date,'YYYY-MM-DD')))=2019 
+and (extract (month from to_date(Purchase_Date,'YYYY-MM-DD')))=2 ;
 
 --QUERY2--
-explain plan set  statement_id='16' for select SUBSTR(Purchase_Date, 1, 4) as "Year",sum(PRICE*QUANTITY) 
-as total_sales_amount from ecommerce group by SUBSTR(Purchase_Date, 1, 4);  /* Time Elapsed:  00:00:00:12*/
-select * from table(DBMS_XPLAN.DISPLAY(null,'16','BASIC')); 
+select SUBSTR(Purchase_Date, 1, 4) as "Year",sum(PRICE*QUANTITY) 
+as total_sales_amount from ecommerce group by SUBSTR(Purchase_Date, 1, 4); 
 
 --QUERY3--
-explain plan set  statement_id='17' for select SUBSTR(Purchase_Date, 6, 2) as "Month",PRODUCTNO,sum(PRICE*QUANTITY) as
- total_sales_amount from ECOMMERCE where SUBSTR(Purchase_Date, 1, 4)='2019'
- group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;   /* Time Elapsed:  00:00:00:26*/
- select * from table(DBMS_XPLAN.DISPLAY(null,'17','BASIC')); 
+select SUBSTR(Purchase_Date, 6, 2) as "Month",PRODUCTNO,sum(PRICE*QUANTITY) as
+ total_sales_amount from ECOMMERCE where SUBSTR(Purchase_Date, 1, 4)='2019' group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;
+
+ --QUERY4--
+ select COUNTRY,count( DISTINCT CUSTOMERNO) as count from ECOMMERCE group by COUNTRY; 
+
+ --QUERY5--
+ SELECT DISTINCT PRODUCTNAME AS UNIQUE_PRODUCTS,EXTRACT(year FROM TO_DATE(Purchase_Date,'YYYY-MM-DD')) as YEAR_FIELD 
+FROM ecommerce; 
+
+----WITH EXPLAIN COMMAND----
+
+--QUERY1--
+explain plan set  statement_id='20' for select sum(quantity) as products_sold from ecommerce where (extract (year from to_date(Purchase_Date,'YYYY-MM-DD')))=2019 
+and (extract (month from to_date(Purchase_Date,'YYYY-MM-DD')))=2 ;
+select * from table(DBMS_XPLAN.DISPLAY(null,'20','BASIC')); 
+
+--QUERY2--
+explain plan set  statement_id='21' for select SUBSTR(Purchase_Date, 1, 4) as "Year",sum(PRICE*QUANTITY) 
+as total_sales_amount from ecommerce group by SUBSTR(Purchase_Date, 1, 4); 
+select * from table(DBMS_XPLAN.DISPLAY(null,'21','BASIC'));
+
+--QUERY3--
+explain plan set  statement_id='22' for select SUBSTR(Purchase_Date, 6, 2) as "Month",PRODUCTNO,sum(PRICE*QUANTITY) as
+ total_sales_amount from ECOMMERCE where SUBSTR(Purchase_Date, 1, 4)='2019' group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;
+ select * from table(DBMS_XPLAN.DISPLAY(null,'22','BASIC')); 
 
 --QUERY4--
-explain plan set  statement_id='18' for select COUNTRY,count( DISTINCT CUSTOMERNO) as count from ECOMMERCE 
-group by COUNTRY;  /* Time Elapsed:  00:00:00:12*/
-select * from table(DBMS_XPLAN.DISPLAY(null,'18','BASIC')); 
+explain plan set  statement_id='23' for select COUNTRY,count( DISTINCT CUSTOMERNO) as count from ECOMMERCE group by COUNTRY; 
+select * from table(DBMS_XPLAN.DISPLAY(null,'23','BASIC'));
 
 --QUERY5--
-explain plan set  statement_id='19' for SELECT DISTINCT PRODUCTNAME AS UNIQUE_PRODUCTS,
-EXTRACT(year FROM TO_DATE(Purchase_Date,'YYYY-MM-DD')) as YEAR_FIELD 
-FROM ecommerce;  /* Time Elapsed:  00:00:00:08*/
-select * from table(DBMS_XPLAN.DISPLAY(null,'19','BASIC'));
+explain plan set  statement_id='24' for SELECT DISTINCT PRODUCTNAME AS UNIQUE_PRODUCTS,EXTRACT(year FROM TO_DATE(Purchase_Date,'YYYY-MM-DD')) as YEAR_FIELD 
+FROM ecommerce; 
+select * from table(DBMS_XPLAN.DISPLAY(null,'24','BASIC'));
