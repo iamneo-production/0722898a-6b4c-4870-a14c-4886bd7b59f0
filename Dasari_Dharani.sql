@@ -1,5 +1,4 @@
-select * from ecommerce;
--- desc ecommerce;
+
 set timing on;
 
 
