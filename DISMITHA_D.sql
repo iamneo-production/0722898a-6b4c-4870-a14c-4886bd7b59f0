@@ -6,7 +6,7 @@ WHERE "PURCHASE_DATE" LIKE '2019-02%';
 
 ---QUERY 2
 SELECT SUBSTR("PURCHASE_DATE",1,4) AS "Year", 
-SUM(price * Quantity) AS Total_SalesAmount
+SUM(price * Quantity) AS Total_Sales_Amount
 FROM ECOMMERCE
 GROUP BY SUBSTR("PURCHASE_DATE",1,4);
 
