@@ -121,4 +121,4 @@ select * from table(DBMS_XPLAN.DISPLAY(null,'23','BASIC'));
 explain plan set  statement_id='24' for SELECT DISTINCT PRODUCTNAME AS UNIQUE_PRODUCTS,
 EXTRACT(year FROM TO_DATE(Purchase_Date,'YYYY-MM-DD')) as YEAR_FIELD 
 FROM ecommerce; 
-select * from table(DBMS_XPLAN.DISPLAY(null,'24','BASIC'));
+select * from table(DBMS_XPLAN.DISPLAY(null,'24','BASIC')) ;  
