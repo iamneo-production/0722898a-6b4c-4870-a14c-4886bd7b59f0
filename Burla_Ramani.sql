@@ -1,3 +1,5 @@
+set timing on;
+-- create index index_on_date on ECOMMERCE(PURCHASE_DATE);
 -- 1. 
 SELECT SUM(quantity) AS Total_Sold
 FROM ecommerce
