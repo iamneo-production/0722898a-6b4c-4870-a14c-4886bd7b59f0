@@ -9,6 +9,7 @@ SUM(price * Quantity) AS Total_Sales_Amount
 FROM ECOMMERCE
 GROUP BY SUBSTR("PURCHASE_DATE",1,4);
 
+
 ---QUERY 3
 SELECT 
 SUBSTR("PURCHASE_DATE",6,2) AS "Month",
