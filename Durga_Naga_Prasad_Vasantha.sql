@@ -1,6 +1,6 @@
 set timing on;
 
---1
+--1 --
 
 select sum(QUANTITY) AS PRODUCTS_SOLD from ECOMMERCE where "PURCHASE_DATE" >='2019-02-01' 
 and "PURCHASE_DATE" <'2019-03-01';
