@@ -31,7 +31,6 @@ FROM ECOMMERCE;
 ----------------INDIVIDUAL CODES WITH EXPLAIN PLAN-------------
 
 ---QUESTION 1
-set serveroutput on;
 explain plan set statement_id='10' for
 SELECT SUM(QUANTITY) AS PRODUCTS_SOLD_IN_FEB
 FROM ECOMMERCE
