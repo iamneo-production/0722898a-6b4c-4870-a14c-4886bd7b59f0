@@ -6,13 +6,19 @@ SELECT SUM(quantity) AS TotalProducts_Sold
 FROM ecommerce
 WHERE "PURCHASE_DATE" LIKE '2019-02%';
 --2
-select  SUBSTR(purchase_date,1,4),sum(price*QUANTITY) as total_sale_amount from ecommerce group by substr(purchase_date,1,4);
+
+select  SUBSTR(purchase_date,1,4),sum(price*QUANTITY) as total_sale_amount 
+from ecommerce group by substr(purchase_date,1,4);
 --3
-select substr(purchase_date,6,2) as month_field,sum(price*QUANTITY)as amount  from ECOMMERCE where substr(purchase_date,1,4)= 2019 group by substr(purchase_date,6,2),productno ;
+select substr(purchase_date,6,2) as "month_field",PRODUCTNO
+,sum(price*QUANTITY)as amount  from ECOMMERCE where substr(purchase_date,1,4)= '2019'
+ group by substr(purchase_date,6,2),productno ;
 --4
-select  COUNTRY, COUNT(DISTINCT customerno) as Dis_cous  from ECOMMERCE group by COUNTRY;
+select  COUNTRY, COUNT(DISTINCT customerno) as coustomer_count  from ECOMMERCE group by COUNTRY;
 --5
-select DISTINCT PRODUCTNAME AS dis_productname,EXTRACT(year FROM TO_DATE(purchase_date,'YYYY-MM-DD'))as year_field from ECOMMERCE;
+select DISTINCT PRODUCTNAME AS unique_products,
+EXTRACT(year FROM TO_DATE(purchase_date,'YYYY-MM-DD'))as year_field from ECOMMERCE;
+
 
 -- FINAL OPTIMIZED CODE--
 
