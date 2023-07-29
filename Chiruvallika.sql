@@ -1,4 +1,5 @@
 set timing on;
+
 --FINAL OPTIMIZED CODES
 -- QUESTION 1
 --total products sold in feb 2019
