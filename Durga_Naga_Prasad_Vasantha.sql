@@ -12,8 +12,10 @@ GROUP BY (EXTRACT(YEAR FROM TO_DATE("PURCHASE_DATE",'YYYY-MM-DD')));
 
 --3
 
-select substr(PURCHASE_DATE,6,2) as "Month", PRODUCTNO,SUM(PRICE*QUANTITY) AS total_sales_amount FROM ECOMMERCE WHERE 
-SUBSTR(PURCHASE_DATE,1,4)='2019' group by substr(PURCHASE_DATE,6,2), PRODUCTNO;
+select PRODUCTNO,extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD')),
+sum(PRICE * QUANTITY) as sale_amount from ecommerce 
+where PURCHASE_DATE>='2019-01-01' and PURCHASE_DATE<'2020-01-01' group by productno, 
+extract(month from TO_DATE(PURCHASE_DATE,'YYYY-MM-DD'));
 
 
 --4
@@ -64,8 +66,8 @@ select * from table(DBMS_XPLAN.DISPLAY(null,'21','BASIC'));
 
 --3
 explain plan set  statement_id='22' for select SUBSTR(Purchase_Date, 6, 2) as "Month",PRODUCTNO,sum(PRICE*QUANTITY) as
- total_sales_amount from ECOMMERCE where SUBSTR(Purchase_Date, 1, 4)='2019' group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;
- select * from table(DBMS_XPLAN.DISPLAY(null,'22','BASIC')); 
+total_sales_amount from ECOMMERCE where SUBSTR(Purchase_Date, 1, 4)='2019' group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;
+select * from table(DBMS_XPLAN.DISPLAY(null,'22','BASIC')); 
 
 --4
 explain plan set  statement_id='23' for select COUNTRY,count( DISTINCT CUSTOMERNO) as count from ECOMMERCE group by COUNTRY; 
