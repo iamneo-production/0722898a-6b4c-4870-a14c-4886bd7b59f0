@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Oracle-Workspace-Dismi24-mb
 ---QUERY 1
 SELECT SUM(quantity) AS Total_Products_Sold
 FROM ecommerce
