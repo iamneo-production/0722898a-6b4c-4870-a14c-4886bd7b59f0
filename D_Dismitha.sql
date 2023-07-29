@@ -1,13 +1,11 @@
-set timing on;
-select* from ecommerce
+
 ---------------BEFORE OPTIMIZATION/INDIVIDUAL CODES-----------------
 
----QUESTION 1
-set serveroutput on;
-SELECT SUM(QUANTITY) AS PRODUCTS_SOLD_IN_FEB
-FROM ECOMMERCE
-WHERE(EXTRACT(YEAR FROM TO_DATE("PURCHASE_DATE",'YYYY-MM-DD')))=2019 AND
-(EXTRACT(MONTH FROM TO_DATE("PURCHASE_DATE",'YYYY-MM-DD')))=2;
+--- QUESTION 1
+select sum(quantity) as PRODUCTS_SOLD_IN_FEB
+from ecommerce
+where(extract(year from to_date(PURCHASE_DATE,'YYYY-MM-DD')))=2019 AND
+(extract(month from to_date(purchase_date,'yyyy-mm-dd')))=2;
 
 ---QUESTION 2
 select SUBSTR("PURCHASE_DATE",1,4) as "Year",sum(PRICE*QUANTITY) as total_sales_amount_eachyear
