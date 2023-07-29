@@ -10,6 +10,7 @@ FROM ecommerce
 WHERE "PURCHASE_DATE" LIKE '2019-02%';
 
 
+
 --Query-2--
 --SQL Query to Total sales amount in each year--
 SELECT SUBSTR("PURCHASE_DATE",1,4) AS "Year_Field", 
