@@ -3,6 +3,7 @@ set timing on;
 -- create index index_on_date on ECOMMERCE(PURCHASE_DATE);
 -- FINAL OPTIMIZED CODE--
 
+
 --1
 select sum(QUANTITY) as total_quantity FROM ECOMMERCE where PURCHASE_DATE like '2019-02%'; 
 
