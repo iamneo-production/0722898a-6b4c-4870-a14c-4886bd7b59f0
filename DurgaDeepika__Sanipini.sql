@@ -22,3 +22,4 @@ group by SUBSTR(Purchase_Date, 6, 2),PRODUCTNO;
  --5
 SELECT DISTINCT PRODUCTNAME AS unique_products,SUBSTR(Purchase_Date, 1, 4) as YEAR
 FROM ecommerce;
+
