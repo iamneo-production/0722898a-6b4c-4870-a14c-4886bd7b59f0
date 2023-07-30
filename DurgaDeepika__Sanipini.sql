@@ -1,4 +1,4 @@
-set timing on;
+-- set timing on;
 
 -- create index index_on_date on ECOMMERCE(PURCHASE_DATE);
 -- FINAL OPTIMIZED CODE--
